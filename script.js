@@ -18,31 +18,58 @@ const buttonNameDict = {
   "nine":"9",
 }
 
-let currentEq = []
+let currentEq = [""]
 
 const handleClick = (event) => {
   value = event.target.value
   if (['CE','del','='].includes(value)){
     if (value === 'CE'){
-      currentEq = []
+      currentEq = [""]
     }
     if (value === 'del'){
       currentEq.pop()
     }
-    if (value === '='){}
-  } else {
+    if (value === '='){
+      currentVal = currentEq[0]
+      for (let i = 2; i < currentEq.length; i += 2){
+        if (currentEq[i-1] === "-"){
+          currentVal = currentVal - currentEq[i]
+        }
+        if (currentEq[i-1] === "+"){
+          currentVal = currentVal + currentEq[i]
+        }
+        if (currentEq[i-1] === "*"){
+          currentVal = currentVal * currentEq[i]
+        }
+        if (currentEq[i-1] === "/"){
+          currentVal = currentVal / currentEq[i]
+        }
+      }
+      updateDisplay(currentVal)
+      currentEq = [""]
+      return
+    }
+  } else if (['-','*','+','/'].includes(value)){
     currentEq.push(value)
+    currentEq.push("")
+  }
+  else {
+    currentEq[(currentEq.length-1)] = currentEq[(currentEq.length-1)] + value
   }
   updateDisplay()
 }
 
-const updateDisplay = () => {
+const updateDisplay = (text="") => {
   const displayText = document.getElementById('display-root')
-  let tmpText = currentEq.join("")
-  if (tmpText.length>10){
-    tmpText = `_${tmpText.slice(tmpText.length-10)}`
-  }
-  displayText.innerText = tmpText
+  if (text == ""){
+    let tmpText = currentEq.join("")
+    if (tmpText.length>10){
+      tmpText = `_${tmpText.slice(tmpText.length-10)}`
+    }
+    displayText.innerText = tmpText
+    return
+    }
+  displayText.innerText = text
 }
 
 const setup = () => {
