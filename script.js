@@ -18,11 +18,31 @@ const buttonNameDict = {
   "nine":"9",
 }
 
-let currentMath = []
+let currentEq = []
 
 const handleClick = (event) => {
   value = event.target.value
-  console.log(value)
+  if (['CE','del','='].includes(value)){
+    if (value === 'CE'){
+      currentEq = []
+    }
+    if (value === 'del'){
+      currentEq.pop()
+    }
+    if (value === '='){}
+  } else {
+    currentEq.push(value)
+  }
+  updateDisplay()
+}
+
+const updateDisplay = () => {
+  const displayText = document.getElementById('display-root')
+  let tmpText = currentEq.join("")
+  if (tmpText.length>10){
+    tmpText = `_${tmpText.slice(tmpText.length-10)}`
+  }
+  displayText.innerText = tmpText
 }
 
 const setup = () => {
