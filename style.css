@@ -1,0 +1,49 @@
+@font-face {
+  font-family: calcFont;
+  src: url('font/DIGITALDREAM.woff') format('woff');
+}
+
+.calc-body {
+  background-color: slategrey;
+  padding: 20px;
+  width: 300px;
+}
+
+.button-container {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-areas: 
+    'button-clear button-divide button-multi button-minus' 
+    'button-seven button-eight button-nine button-plus'
+    'button-four button-five button-six button-plus'
+    'button-one button-two button-three button-equals'
+    'button-zero button-zero button-delete button-equals'
+
+  ;
+  width: 300px;
+  height: 350px;
+  grid-gap: 8px;
+}
+
+.calc-button {
+  font-size: large;
+  font-weight: bolder;
+  background-color: lightgrey;
+}
+
+.calc-display-text {
+  font-family: calcFont;
+  font-size: xx-large;
+}
+
+.calc-display-area {
+  background-color: darkgrey;
+  padding: 4px;
+  margin-bottom: 6px;
+}
+
+.calc-display {
+  background-color: seagreen;
+  margin: 2px;
+  padding: 4px;
+}
